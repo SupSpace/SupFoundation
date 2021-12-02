@@ -1,5 +1,3 @@
-import UIKit
-
 // Ref: https://github.com/AliSoftware/Reusable
 
 public protocol Reusable: class {
