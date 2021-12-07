@@ -1,6 +1,6 @@
 // Ref: https://github.com/AliSoftware/Reusable
 
-public protocol Reusable: class {
+public protocol Reusable: AnyObject {
   /// The reuse identifier to use when registering and later dequeuing a reusable cell
   static var reuseIdentifier: String { get }
 }

@@ -19,6 +19,7 @@ import UIKit
 // ===== code block =====
 //
 public struct BottomSheet {
+    @discardableResult
     @available(iOS 15.0, *)
     public static func show(
         _ containerViewController: UIViewController,
@@ -47,6 +48,7 @@ public struct BottomSheetConfiguration {
         case large
         
         @available(iOS 15.0, *)
+        // The responding detent in UIKit
         var uikitDetent: UISheetPresentationController.Detent {
             switch self {
             case .medium:
