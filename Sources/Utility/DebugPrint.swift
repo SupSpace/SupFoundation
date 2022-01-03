@@ -7,37 +7,46 @@
 
 import Foundation
 
-#if DEBUG
+public struct Log {
+  enum Level: String {
+    case debug = "DEBUG"
+    case error = "ERROR"
+    case success = "SUCCESS"
+  }
 
-public func dprint(file: String = #file, line: Int = #line, function: String = #function) {
-    print(file.components(separatedBy: "/").last!, "\(line)", function)
+  public static func debug(
+    _ message: @autoclosure () -> Any,
+    _ file: String = #file,
+    _ function: String = #function,
+    _ line: Int = #line
+  ) {
+      #if DEBUG
+      print("☘️ \(Level.debug.rawValue) [\(file) `\(function)` #\(line)]\n\(message())\n")
+      #else
+      #endif
+  }
+
+  public static func error(
+    _ message: @autoclosure () -> Any,
+    _ file: String = #file,
+    _ function: String = #function,
+    _ line: Int = #line
+  ) {
+      #if DEBUG
+      print("❌ \(Level.error.rawValue) [\(file) `\(function)` #\(line)]\n\(message())\n")
+      #else
+      #endif
+  }
+
+  public static func success(
+    _ message: @autoclosure () -> Any,
+    _ file: String = #file,
+    _ function: String = #function,
+    _ line: Int = #line
+  ) {
+      #if DEBUG
+      print("🎉 \(Level.success.rawValue) [\(file) `\(function)` #\(line)]\n\(message())\n")
+      #else
+      #endif
+  }
 }
-
-public func dprint(file: String = #file, line: Int = #line, function: String = #function, _ item: @autoclosure () -> Any) {
-    print(file.components(separatedBy: "/").last!, "\(line)", function, "\(item())")
-}
-
-public func dprint(file: String = #file, line: Int = #line, function: String = #function, _ items: Any...) {
-    var itemStrings = ""
-    if items.count > 1 {
-        items.forEach {
-            itemStrings += "\($0) "
-        }
-    } else if let item = items.first {
-        itemStrings = "\(item)"
-    }
-    print(file.components(separatedBy: "/").last!, "\(line)", function, itemStrings)
-}
-
-#else
-
-public func dprint() {
-}
-
-public func dprint(_ item: @autoclosure () -> Any) {
-}
-
-public func dprint(_ items: Any...) {
-}
-
-#endif
