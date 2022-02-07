@@ -98,7 +98,7 @@ open class SPAlertView: UIView {
         
         switch preset {
         case .spinner:
-            dismissInTime = false
+            dismissInTime = true
             dismissByTap = false
         default:
             dismissInTime = true
